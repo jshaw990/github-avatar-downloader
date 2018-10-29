@@ -13,3 +13,20 @@ function getRepoContributors(repoOwner, repoName, cb) {
     cb(err, body);
     });
 }
+
+function isoAvatar(err, data) {
+    if (err) {
+        console.log("Error: " + err);
+    } else {
+        console.log("Avatars Downloading...");
+        JSON.parse(data).forEach (user => {
+            downloadURL(user.avatar_url,"avatars/" + user.login + ".jpg");
+        });
+    }
+
+}
+
+function downloadImageByURL(url, filePath) {
+    request(url)
+        .pipe(fs.createWriteSteam(filepath)); 
+}
